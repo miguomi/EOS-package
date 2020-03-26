@@ -1,0 +1,16 @@
+YTBP（EOS）编译方法，以及网速慢造成下载不成功的解决办法。
+主要包括各种依赖包。
+编译方法：
+   1、运行eosio_build.sh
+   2、会运行scripts下的脚本，构建依赖，如果遇到下载不下来的问题，手动下载，并注释掉相应系统脚本下的代码。
+      比如ubuntu系统，脚本对应eosio_build_ubuntu.sh。
+      主要包括boost,mongodb,llvm。
+      注意问题：文件存放路径，主要涉及到/tmp和~目录下。文件不一样，文件路径不一样。
+   3、记得更改ubuntu的apt-get源。
+依赖包：
+   1、YTBP.tar已经包括各种submodule
+   2、llvm.tar.gz已经包括clang
+
+百度网盘地址：
+链接：https://pan.baidu.com/s/1m31AA_njxvY_MRPJc2IOtg 
+提取码：elhe
