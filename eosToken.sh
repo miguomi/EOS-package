@@ -96,12 +96,12 @@ sleep 1s
 ##################创建账户NEW_ACCOUNT_NAME end#############
 
 echo '创建代币'
-${ROOTPATH}${CLSGT} push action eosio.token create '{"issuer":"eosio","maximum_supply":"1000000000.0000 YTA"}' -p eosio.token
+${ROOTPATH}${CLSGT} push action eosio.token create '{"issuer":"eosio","maximum_supply":"1000000000.0000 SGT"}' -p eosio.token
 sleep 1s
 
 #向NEW_ACCOUNT_NAME账户转100块
 echo 'eosio.token tranfer 100 to '${NEW_ACCOUNT_NAME}
-${ROOTPATH}${CLSGT} push action eosio.token issue '[ "'${NEW_ACCOUNT_NAME}'", "100.0000 YTA", "helloYTA" ]' -p eosio
+${ROOTPATH}${CLSGT} push action eosio.token issue '[ "'${NEW_ACCOUNT_NAME}'", "100.0000 SGT", "helloSGT" ]' -p eosio
 sleep 1s
 
 #echo 'query the info of '${NEW_ACCOUNT_NAME}' in eosio.token contract'
@@ -110,6 +110,16 @@ ${ROOTPATH}${CLSGT} get table eosio.token ${NEW_ACCOUNT_NAME} accounts
 
 
 
- 
+printf '\t _           _          _  _  _  _\n'     
+printf '\t(_)       _ (_)       _(_)(_)(_)(_)_\n'   
+printf '\t(_)    _ (_)         (_)          (_)\n'  
+printf '\t(_) _ (_)            (_)          (_)\n'  
+printf '\t(_)(_) _             (_)          (_)\n'  
+printf '\t(_)   (_) _          (_)          (_)\n'  
+printf '\t(_)      (_) _       (_)_  _  _  _(_)\n'  
+printf '\t(_)         (_)        (_)(_)(_)(_)\n'    
+                                           
+printf "\\n\\tSHELL has been completed.\\n\\n"
+
 
 
