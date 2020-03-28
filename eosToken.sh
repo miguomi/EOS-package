@@ -1,5 +1,4 @@
 #!/bin/bash
-#单节点链部署，已经发行token流程
 
 CLSGT=clSGT
 NODSGT=nodSGT
@@ -31,7 +30,7 @@ fi
 
 echo ${ROOTPATH}${KSGTD}' starting, waiting'
 ${ROOTPATH}${KSGTD} >> ${ROOTPATH}${LOGDIR}/${KSGTD}.log 2>&1 &
-sleep 1s
+sleep 3s
 
 #启动nodsgt
 echo 'remove '${DATAPATH}
@@ -50,7 +49,7 @@ ${ROOTPATH}${NODSGT} -e -p eosio --plugin eosio::producer_plugin \
                                --contracts-console \
                                --http-validate-host=false —filter-on=‘*’ >> ${ROOTPATH}${LOGDIR}/${NODSGT}.log 2>&1 &
 
-sleep 5s
+sleep 10s
  
 
 echo 'get  info'
@@ -73,12 +72,12 @@ awk 'BEGIN {FS=" "} {if ($1 ~ "Private") {print $3}}'  ${ROOTPATH}${LOGDIR}/eosi
 echo 'create accout eosio.token'
 PUBLIC_KEY=`awk 'BEGIN {FS=" "} {if ($1 ~ "Public") {print $3}}'  ${ROOTPATH}${LOGDIR}/eosioToken_key.log`
 ${ROOTPATH}${CLSGT} create account eosio eosio.token ${PUBLIC_KEY} ${PUBLIC_KEY}
-sleep 1
+sleep 1s
 
 #在eosio.token账户上部署eosio.token合约 
 echo 'set contract in accout eosio.token'
 ${ROOTPATH}${CLSGT} set contract eosio.token ${EOSIO_TOKEN_CONTRACTS_PATH} -p eosio.token
-sleep 1
+sleep 1s
 
 ##################创建账户NEW_ACCOUNT_NAME begin#############
 #账号少于13个字符，只能包括如下字符.12345abcdefghijklmnopqrstuvwxyz
@@ -93,17 +92,17 @@ echo 'create accout '${NEW_ACCOUNT_NAME}
 PUBLIC_KEY=`awk 'BEGIN {FS=" "} {if ($1 ~ "Public") {print $3}}'  ${ROOTPATH}${LOGDIR}/${NEW_ACCOUNT_NAME}'_key.log'`
 echo ${NEW_ACCOUNT_NAME}' public_key is '${PUBLIC_KEY}
 ${ROOTPATH}${CLSGT} create account eosio ${NEW_ACCOUNT_NAME} ${PUBLIC_KEY} ${PUBLIC_KEY}
-sleep 1
+sleep 1s
 ##################创建账户NEW_ACCOUNT_NAME end#############
 
 echo '创建代币'
 ${ROOTPATH}${CLSGT} push action eosio.token create '{"issuer":"eosio","maximum_supply":"1000000000.0000 YTA"}' -p eosio.token
-sleep 1
+sleep 1s
 
 #向NEW_ACCOUNT_NAME账户转100块
 echo 'eosio.token tranfer 100 to '${NEW_ACCOUNT_NAME}
-${ROOTPATH}${CLSGT} push action eosio.token issue '[ ${NEW_ACCOUNT_NAME}, "100.0000 YTA", "helloYTA" ]' -p eosio
-sleep 1
+${ROOTPATH}${CLSGT} push action eosio.token issue '[ "'${NEW_ACCOUNT_NAME}'", "100.0000 YTA", "helloYTA" ]' -p eosio
+sleep 1s
 
 #echo 'query the info of '${NEW_ACCOUNT_NAME}' in eosio.token contract'
 #查询NEW_ACCOUNT_NAME在eosio.token合约上的账户信息、余额
@@ -111,5 +110,6 @@ ${ROOTPATH}${CLSGT} get table eosio.token ${NEW_ACCOUNT_NAME} accounts
 
 
 
+ 
 
 
