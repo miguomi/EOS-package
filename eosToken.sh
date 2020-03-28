@@ -95,7 +95,7 @@ ${ROOTPATH}${CLSGT} create account eosio ${NEW_ACCOUNT_NAME} ${PUBLIC_KEY} ${PUB
 sleep 1s
 ##################创建账户NEW_ACCOUNT_NAME end#############
 
-echo '创建代币'
+echo 'create token'
 ${ROOTPATH}${CLSGT} push action eosio.token create '{"issuer":"eosio","maximum_supply":"1000000000.0000 SGT"}' -p eosio.token
 sleep 1s
 
