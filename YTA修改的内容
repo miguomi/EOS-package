@@ -1,0 +1,6 @@
+E:\cppproject\YTBP\libraries\fc\include\fc\crypto\public_key.hpp 11行
+constexpr const char* public_key_legacy_prefix = "YTA"; //公钥前缀又EOS改为了YTA
+
+
+多节点私链
+https://blog.csdn.net/bedrock_stable/article/details/80318178
